@@ -26,7 +26,8 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -51,6 +52,16 @@ export default {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
+				},
+				// Custom portfolio colors
+				cyber: {
+					blue: 'hsl(var(--cyber-blue))',
+					purple: 'hsl(var(--cyber-purple))',
+					pink: 'hsl(var(--cyber-pink))',
+					green: 'hsl(var(--cyber-green))',
+				},
+				neural: {
+					orange: 'hsl(var(--neural-orange))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
