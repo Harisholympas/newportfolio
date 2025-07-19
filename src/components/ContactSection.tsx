@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Mail, Github, Linkedin, MapPin, GraduationCap, Code2 } from 'lucide-react';
+import { Mail, Github, Linkedin, MapPin, GraduationCap, Code2, Instagram, Twitter, Youtube, ExternalLink } from 'lucide-react';
 
 const contactItems = [
   {
@@ -31,6 +31,39 @@ const contactItems = [
     value: "Tamil Nadu, India",
     href: null,
     color: "text-cyber-pink"
+  }
+];
+
+const socialProfiles = [
+  {
+    name: "GitHub",
+    icon: Github,
+    url: "https://github.com/harish-username",
+    color: "text-foreground hover:text-primary"
+  },
+  {
+    name: "LinkedIn",
+    icon: Linkedin,
+    url: "https://linkedin.com/in/harish-username",
+    color: "text-cyber-blue hover:text-cyber-blue/80"
+  },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    url: "https://instagram.com/harish_username",
+    color: "text-cyber-pink hover:text-cyber-pink/80"
+  },
+  {
+    name: "Twitter",
+    icon: Twitter,
+    url: "https://twitter.com/harish_username",
+    color: "text-cyber-blue hover:text-cyber-blue/80"
+  },
+  {
+    name: "YouTube",
+    icon: Youtube,
+    url: "https://youtube.com/@harish_channel",
+    color: "text-neural-orange hover:text-neural-orange/80"
   }
 ];
 
@@ -186,6 +219,56 @@ export const ContactSection = () => {
                   <Linkedin className="h-4 w-4 mr-2" />
                   Connect on LinkedIn
                 </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Social Media Profiles */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <Card className="glass-card border-primary/20">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold gradient-text mb-6">
+                Connect on Social Media
+              </h3>
+              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+                Follow my journey in AI/ML engineering, get updates on latest projects, 
+                and connect with me across various platforms.
+              </p>
+              
+              <div className="flex flex-wrap justify-center gap-6">
+                {socialProfiles.map((profile, index) => (
+                  <motion.a
+                    key={profile.name}
+                    href={profile.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-3 p-4 rounded-lg glass-card border-primary/10 hover:border-primary/30 transition-all duration-300 group ${profile.color}`}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.8 + (index * 0.1) }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <profile.icon className="h-6 w-6 group-hover:scale-110 transition-transform" />
+                    <span className="font-medium">{profile.name}</span>
+                    <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </motion.a>
+                ))}
+              </div>
+              
+              <div className="mt-8 p-4 bg-muted/20 rounded-lg">
+                <p className="text-sm text-muted-foreground">
+                  <strong>Note:</strong> Please update the social media URLs above with your actual profile links. 
+                  The current links are placeholder examples.
+                </p>
               </div>
             </CardContent>
           </Card>

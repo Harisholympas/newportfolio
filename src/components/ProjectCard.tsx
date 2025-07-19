@@ -3,6 +3,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, ExternalLink } from 'lucide-react';
 
+// Import project images
+import trafficSystemImg from '@/assets/traffic-system.jpg';
+import clothSegregationImg from '@/assets/cloth-segregation.jpg';
+import autonomousRoverImg from '@/assets/autonomous-rover.jpg';
+import brainComputerImg from '@/assets/brain-computer.jpg';
+import elephantDetectionImg from '@/assets/elephant-detection.jpg';
+import solarAiImg from '@/assets/solar-ai.jpg';
+
 interface Project {
   id: number;
   title: string;
@@ -17,6 +25,18 @@ interface ProjectCardProps {
   project: Project;
 }
 
+const getProjectImage = (projectId: number) => {
+  switch (projectId) {
+    case 1: return trafficSystemImg;
+    case 2: return clothSegregationImg;
+    case 3: return autonomousRoverImg;
+    case 4: return brainComputerImg;
+    case 5: return elephantDetectionImg;
+    case 6: return solarAiImg;
+    default: return trafficSystemImg;
+  }
+};
+
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
     <motion.div
@@ -24,18 +44,25 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
       transition={{ duration: 0.3 }}
       className="h-full"
     >
-      <Card className="glass-card border-primary/20 hover:border-primary/40 transition-all duration-300 h-full flex flex-col neural-animation group">
+      <Card className="glass-card border-primary/20 hover:border-primary/40 transition-all duration-300 h-full flex flex-col group hover:shadow-lg hover:shadow-primary/20"
+        style={{
+          boxShadow: 'none'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.boxShadow = '0 0 20px hsl(var(--primary) / 0.3)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.boxShadow = 'none';
+        }}
+      >
         <CardHeader className="space-y-4">
-          <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary-glow/20 rounded-lg flex items-center justify-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyber-blue/20 to-cyber-purple/20" />
-            <div className="text-4xl opacity-60 group-hover:opacity-80 transition-opacity">
-              {project.category === 'AI/ML' && '🤖'}
-              {project.category === 'Automation' && '⚙️'}
-              {project.category === 'Robotics' && '🤖'}
-              {project.category === 'Research' && '🧠'}
-              {project.category === 'Conservation' && '🐘'}
-              {project.category === 'Energy' && '☀️'}
-            </div>
+          <div className="aspect-video rounded-lg overflow-hidden relative">
+            <img 
+              src={getProjectImage(project.id)}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
           
           <div>

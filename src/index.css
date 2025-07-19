@@ -167,7 +167,11 @@ All colors MUST be HSL.
   }
 
   .neural-animation {
-    animation: pulse-neural 2s ease-in-out infinite alternate;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .neural-animation:hover {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary-glow) / 0.4);
   }
 
   @keyframes pulse-neural {
