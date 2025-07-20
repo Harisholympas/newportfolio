@@ -14,6 +14,16 @@ const skillCategories = [
     ]
   },
   {
+    title: "NLP & Data Analytics",
+    skills: [
+      { name: "Natural Language Processing", level: 80 },
+      { name: "Pandas", level: 85 },
+      { name: "NumPy", level: 90 },
+      { name: "Matplotlib/Seaborn", level: 80 },
+      { name: "Statistical Analysis", level: 75 }
+    ]
+  },
+  {
     title: "Programming Languages",
     skills: [
       { name: "Python", level: 95 },
@@ -56,7 +66,7 @@ export const SkillsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-heading gradient-text mb-6">
             Technical Skills
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
@@ -64,12 +74,12 @@ export const SkillsSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
-              initial={{ opacity: 0, x: categoryIndex % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
               viewport={{ once: true }}
             >

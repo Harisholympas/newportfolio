@@ -129,36 +129,60 @@ export const Scene3D = ({ className }: Scene3DProps) => {
       });
     }
 
-    // Particle system for neural network effect
-    const particleCount = 200;
+    // Enhanced particle system for neural network effect
+    const particleCount = 300;
     const particleGeometry = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
     const particleVelocities: THREE.Vector3[] = [];
+    const particleConnections: { start: number; end: number }[] = [];
 
     for (let i = 0; i < particleCount; i++) {
-      particlePositions[i * 3] = (Math.random() - 0.5) * 20;
-      particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+      particlePositions[i * 3] = (Math.random() - 0.5) * 25;
+      particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 25;
+      particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 25;
       
       particleVelocities.push(new THREE.Vector3(
-        (Math.random() - 0.5) * 0.02,
-        (Math.random() - 0.5) * 0.02,
-        (Math.random() - 0.5) * 0.02
+        (Math.random() - 0.5) * 0.01,
+        (Math.random() - 0.5) * 0.01,
+        (Math.random() - 0.5) * 0.01
       ));
+    }
+
+    // Create random connections between particles
+    for (let i = 0; i < 150; i++) {
+      particleConnections.push({
+        start: Math.floor(Math.random() * particleCount),
+        end: Math.floor(Math.random() * particleCount)
+      });
     }
 
     particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
 
     const particleMaterial = new THREE.PointsMaterial({
       color: 0x8a2be2,
-      size: 0.05,
+      size: 0.08,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.8,
       blending: THREE.AdditiveBlending,
     });
 
     const particles = new THREE.Points(particleGeometry, particleMaterial);
     scene.add(particles);
+
+    // Create connecting lines for neural network effect
+    const lineGeometry = new THREE.BufferGeometry();
+    const linePositions = new Float32Array(particleConnections.length * 6);
+    lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+
+    const lineMaterial = new THREE.LineBasicMaterial({
+      color: 0x4444ff,
+      transparent: true,
+      opacity: 0.3,
+      blending: THREE.AdditiveBlending,
+    });
+
+    const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+    scene.add(lines);
 
     // Animation loop
     const animate = (time: number) => {
@@ -180,15 +204,30 @@ export const Scene3D = ({ className }: Scene3DProps) => {
         positions[i * 3 + 1] += particleVelocities[i].y;
         positions[i * 3 + 2] += particleVelocities[i].z;
 
-        // Boundary checking
-        if (positions[i * 3] > 10) particleVelocities[i].x *= -1;
-        if (positions[i * 3] < -10) particleVelocities[i].x *= -1;
-        if (positions[i * 3 + 1] > 10) particleVelocities[i].y *= -1;
-        if (positions[i * 3 + 1] < -10) particleVelocities[i].y *= -1;
-        if (positions[i * 3 + 2] > 10) particleVelocities[i].z *= -1;
-        if (positions[i * 3 + 2] < -10) particleVelocities[i].z *= -1;
+        // Boundary checking with smoother transitions
+        if (positions[i * 3] > 12) particleVelocities[i].x *= -0.8;
+        if (positions[i * 3] < -12) particleVelocities[i].x *= -0.8;
+        if (positions[i * 3 + 1] > 12) particleVelocities[i].y *= -0.8;
+        if (positions[i * 3 + 1] < -12) particleVelocities[i].y *= -0.8;
+        if (positions[i * 3 + 2] > 12) particleVelocities[i].z *= -0.8;
+        if (positions[i * 3 + 2] < -12) particleVelocities[i].z *= -0.8;
       }
       particleGeometry.attributes.position.needsUpdate = true;
+
+      // Update neural network connections
+      const linePositions = lineGeometry.attributes.position.array as Float32Array;
+      particleConnections.forEach((connection, index) => {
+        const startIndex = connection.start * 3;
+        const endIndex = connection.end * 3;
+        
+        linePositions[index * 6] = positions[startIndex];
+        linePositions[index * 6 + 1] = positions[startIndex + 1];
+        linePositions[index * 6 + 2] = positions[startIndex + 2];
+        linePositions[index * 6 + 3] = positions[endIndex];
+        linePositions[index * 6 + 4] = positions[endIndex + 1];
+        linePositions[index * 6 + 5] = positions[endIndex + 2];
+      });
+      lineGeometry.attributes.position.needsUpdate = true;
 
       // Animate lights
       pointLight1.position.x = Math.sin(time * 0.001) * 3;
@@ -227,6 +266,8 @@ export const Scene3D = ({ className }: Scene3DProps) => {
       materials.forEach(mat => mat.dispose());
       particleGeometry.dispose();
       particleMaterial.dispose();
+      lineGeometry.dispose();
+      lineMaterial.dispose();
       renderer.dispose();
     };
   }, []);

@@ -18,7 +18,7 @@ const projects = [
       "22% improvement in traffic flow during peak hours"
     ],
     category: "AI/ML",
-    image: "/api/placeholder/400/250"
+    image: "src/assets/traffic-system.jpg"
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const projects = [
       "70% reduction in human intervention"
     ],
     category: "Automation",
-    image: "/api/placeholder/400/250"
+    image: "src/assets/cloth-segregation.jpg"
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ const projects = [
       "Successful autonomous navigation in complex environments"
     ],
     category: "Robotics",
-    image: "/api/placeholder/400/250"
+    image: "src/assets/autonomous-rover.jpg"
   },
   {
     id: 4,
@@ -57,7 +57,7 @@ const projects = [
       "Applications in mental health monitoring"
     ],
     category: "Research",
-    image: "/api/placeholder/400/250"
+    image: "src/assets/brain-computer.jpg"
   },
   {
     id: 5,
@@ -70,7 +70,7 @@ const projects = [
       "Automated deterrent system for wildlife safety"
     ],
     category: "Conservation",
-    image: "/api/placeholder/400/250"
+    image: "src/assets/elephant-detection.jpg"
   },
   {
     id: 6,
@@ -83,7 +83,7 @@ const projects = [
       "Reduced maintenance costs and water usage"
     ],
     category: "Energy",
-    image: "/api/placeholder/400/250"
+    image: "src/assets/solar-ai.jpg"
   }
 ];
 
@@ -107,7 +107,7 @@ export const Portfolio = () => {
               className="space-y-6"
             >
               <motion.h1 
-                className="text-6xl md:text-8xl font-bold gradient-text"
+                className="text-6xl md:text-8xl font-bold font-heading gradient-text"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.2 }}
@@ -121,11 +121,11 @@ export const Portfolio = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="space-y-4"
               >
-                <h2 className="text-xl md:text-2xl text-cyber-blue font-light tracking-wide">
+                <h2 className="text-xl md:text-2xl text-cyber-blue font-light font-heading tracking-wide">
                   AI/ML ENGINEER & EMBEDDED SYSTEMS INNOVATOR
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  3rd Year BE CSE AIML • D.E. Mahalingam College of Engineering and Technology
+                  3rd Year BE CSE AIML • Dr. Mahalingam College of Engineering and Technology
                 </p>
                 <p className="text-foreground/80 max-w-3xl mx-auto text-lg leading-relaxed">
                   Passionate about building intelligent solutions that bridge the digital and physical worlds. 
@@ -151,6 +151,12 @@ export const Portfolio = () => {
                 <div className="glass-card px-4 py-2 rounded-full border-neural-orange/30">
                   <span className="text-sm text-neural-orange">Real-time Systems</span>
                 </div>
+                <div className="glass-card px-4 py-2 rounded-full border-cyber-green/30">
+                  <span className="text-sm text-cyber-green">NLP & Analytics</span>
+                </div>
+                <div className="glass-card px-4 py-2 rounded-full border-accent/30">
+                  <span className="text-sm text-accent">Data Science</span>
+                </div>
               </motion.div>
             </motion.div>
           </div>
@@ -169,7 +175,7 @@ export const Portfolio = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold font-heading gradient-text mb-6">
                 Featured Projects
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
